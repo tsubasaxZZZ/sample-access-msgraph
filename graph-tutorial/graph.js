@@ -17,10 +17,10 @@ module.exports = {
             return new Promise((resolve, reject) => {
                 const chunks = [];
                 readableStream.on("data", (data) => {
-                    chunks.push(data.toString());
+                    chunks.push(data);
                 });
                 readableStream.on("end", () => {
-                    resolve(chunks.join(""));
+                    resolve(Buffer.concat(chunks));
                 });
                 readableStream.on("error", reject);
             });
